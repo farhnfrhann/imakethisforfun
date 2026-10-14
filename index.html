@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#05090d">
+  <meta name="description" content="Farhan — electrical engineering student exploring circuits, systems and energy.">
+  <title>farhan.exe // electrical engineering</title>
+  <style>
+    :root {
+      --bg:#05090d; --panel:#091219; --line:#15332f; --green:#00ff9c;
+      --cyan:#00d9ff; --muted:#8ba2ad; --white:#e9fbff; --pink:#ff3cac;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0; min-height:100vh; color:var(--white);
+      background:
+        radial-gradient(ellipse at 80% 5%, #07312b55 0, transparent 35%),
+        radial-gradient(ellipse at 5% 60%, #06203355 0, transparent 35%),
+        var(--bg);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      overflow-x:hidden;
+    }
+    body::before {
+      content:""; position:fixed; inset:0; pointer-events:none; z-index:5; opacity:.14;
+      background:repeating-linear-gradient(to bottom, transparent 0 3px, #000 4px 5px);
+    }
+    a { color:inherit; text-decoration:none; }
+    .wrap { width:min(1080px, calc(100% - 32px)); margin:auto; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px 0; border-bottom:1px solid #17302f; }
+    .brand { letter-spacing:.14em; font-weight:800; font-size:1.05rem; }
+    .brand span { color:var(--green); }
+    nav { display:flex; gap:22px; color:var(--muted); font-size:.75rem; text-transform:uppercase; letter-spacing:.12em; }
+    nav a:hover, .link:hover { color:var(--green); }
+    .status { color:var(--green); font-size:.7rem; letter-spacing:.1em; white-space:nowrap; }
+    .hero { display:grid; grid-template-columns:1.05fr .95fr; gap:34px; align-items:center; padding:76px 0 48px; }
+    .eyebrow { color:var(--cyan); font-size:.72rem; letter-spacing:.2em; text-transform:uppercase; }
+    h1 { margin:18px 0 12px; font-size:clamp(2.4rem, 8vw, 5.5rem); line-height:.98; letter-spacing:-.08em; }
+    h1 .glow { color:var(--green); text-shadow:0 0 22px #00ff9c55; }
+    .intro { max-width:540px; color:#a6bac2; line-height:1.8; font-family:system-ui, sans-serif; font-size:1rem; }
+    .prompt { color:var(--green); margin-top:24px; font-size:.85rem; }
+    .cursor { display:inline-block; width:8px; height:1em; vertical-align:-.15em; background:var(--green); animation:blink 1s steps(2) infinite; }
+    @keyframes blink { 50% { opacity:0; } }
+    .actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:26px; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; border:1px solid var(--green); padding:12px 16px; color:var(--green); font-size:.78rem; letter-spacing:.06em; transition:.2s; }
+    .btn.primary { background:var(--green); color:#03100b; font-weight:800; }
+    .btn:hover { box-shadow:0 0 22px #00ff9c30; transform:translateY(-2px); }
+    .visual { min-height:310px; position:relative; border:1px solid #1b4541; background:linear-gradient(145deg,#0b171d,#061015 70%); overflow:hidden; padding:18px; box-shadow:0 0 55px #00d9ff0b inset; }
+    .visual:before,.visual:after { content:""; position:absolute; width:80px; height:80px; border-color:var(--green); border-style:solid; opacity:.65; }
+    .visual:before { top:0; left:0; border-width:1px 0 0 1px; }
+    .visual:after { right:0; bottom:0; border-width:0 1px 1px 0; }
+    .visual-head { display:flex; justify-content:space-between; color:var(--muted); font-size:.68rem; }
+    .grid-art { position:absolute; inset:40px 0 0; opacity:.35; background-image:linear-gradient(#164b43 1px, transparent 1px),linear-gradient(90deg,#164b43 1px,transparent 1px); background-size:28px 28px; mask-image:linear-gradient(transparent,#000 20%,#000 85%,transparent); }
+    .tower { position:absolute; left:50%; top:48%; transform:translate(-50%,-50%); width:180px; height:205px; filter:drop-shadow(0 0 8px #00ff9c77); }
+    .tower svg { width:100%; height:100%; }
+    .voltage { position:absolute; right:18px; top:42%; color:var(--cyan); font-size:.72rem; line-height:1.9; }
+    .wave { position:absolute; bottom:18px; left:18px; right:18px; height:45px; width:calc(100% - 36px); }
+    .section-title { display:flex; align-items:center; gap:14px; color:var(--green); font-size:.75rem; letter-spacing:.24em; text-transform:uppercase; margin:28px 0 18px; }
+    .section-title:after { content:""; height:1px; flex:1; background:linear-gradient(90deg,#17634b,transparent); }
+    .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .card { border:1px solid #183530; background:#081116cc; padding:20px; min-height:160px; transition:.2s; }
+    .card:hover { border-color:var(--green); transform:translateY(-3px); box-shadow:0 8px 30px #00ff9c0d; }
+    .icon { color:var(--green); font-size:1.5rem; margin-bottom:16px; }
+    .card h3 { font-size:.92rem; margin:0 0 9px; }
+    .card p { color:var(--muted); font: .86rem/1.6 system-ui,sans-serif; margin:0; }
+    .card small { display:block; margin-top:16px; color:var(--cyan); font-size:.68rem; }
+    .about { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .panel { border:1px solid #183530; background:#081116aa; padding:22px; }
+    .panel p { color:var(--muted); font: .9rem/1.8 system-ui,sans-serif; }
+    .meter { margin:18px 0; }
+    .meter-label { display:flex; justify-content:space-between; font-size:.72rem; margin-bottom:8px; color:#c5d7dd; }
+    .track { height:4px; background:#1a2b30; }
+    .track span { display:block; height:100%; width:var(--w); background:linear-gradient(90deg,var(--cyan),var(--green)); box-shadow:0 0 10px #00ff9c55; }
+    .contact { text-align:center; padding:54px 0 60px; }
+    .contact h2 { font-size:clamp(1.5rem,5vw,2.6rem); margin:12px 0; }
+    .contact p { color:var(--muted); font: .9rem/1.7 system-ui,sans-serif; }
+    footer { border-top:1px solid #17302f; padding:20px 0 30px; display:flex; justify-content:space-between; gap:12px; color:#6c858e; font-size:.68rem; }
+    .tiny { color:var(--green); }
+    @media (max-width:720px) {
+      header { align-items:flex-start; flex-direction:column; gap:14px; }
+      nav { gap:15px; flex-wrap:wrap; font-size:.68rem; }
+      .status { display:none; }
+      .hero { grid-template-columns:1fr; padding:52px 0 28px; gap:28px; }
+      .visual { min-height:285px; }
+      .cards { grid-template-columns:1fr; }
+      .card { min-height:auto; }
+      .about { grid-template-columns:1fr; }
+      footer { flex-direction:column; }
+    }
+    @media (prefers-reduced-motion: reduce) { *,*::before,*::after { animation:none!important; scroll-behavior:auto!important; transition:none!important; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#home">FARHAN<span>.EXE</span></a>
+      <nav aria-label="Main navigation">
+        <a href="#home">Home</a><a href="#projects">Projects</a><a href="#about">System</a><a href="#contact">Contact</a>
+      </nav>
+      <div class="status">● SYSTEM ONLINE</div>
+    </header>
+
+    <main>
+      <section class="hero" id="home">
+        <div>
+          <div class="eyebrow">// Electrical engineering student</div>
+          <h1>hello,<br>i'm <span class="glow">farhan</span><span class="tiny">_</span></h1>
+          <p class="intro">Exploring electricity, circuits, energy and the systems that keep our world running. One connection at a time.</p>
+          <div class="prompt">&gt; ready to build something better<span class="cursor"></span></div>
+          <div class="actions">
+            <a class="btn primary" href="#projects">↘ EXPLORE PROJECTS</a>
+            <a class="btn" href="#contact">[ CONNECT ]</a>
+          </div>
+        </div>
+        <div class="visual" aria-label="Animated power-grid illustration">
+          <div class="visual-head"><span>GRID_NODE_01</span><span>50.00 Hz // NOMINAL</span></div>
+          <div class="grid-art"></div>
+          <div class="tower">
+            <svg viewBox="0 0 180 205" fill="none" aria-hidden="true">
+              <g stroke="#00ff9c" stroke-width="1.5">
+                <path d="M90 8 L48 194 M90 8 L132 194 M61 135 H119 M55 160 H125 M48 194 H132 M68 105 H112 M58 78 H122 M42 56 H138 M34 42 H146"/>
+                <path d="M90 8 L34 42 M90 8 L146 42 M48 194 L112 105 M132 194 L68 105 M55 160 L125 135 M125 160 L55 135 M58 78 L122 105 M122 78 L58 105 M42 56 L138 78 M138 56 L42 78"/>
+                <path d="M8 42 H172 M0 56 H180 M20 78 H160" stroke="#00d9ff" opacity=".8"/>
+                <circle cx="90" cy="8" r="3" fill="#00ff9c"/>
+              </g>
+            </svg>
+          </div>
+          <div class="voltage">V = I × R<br><span style="color:#8ba2ad">P = V × I</span><br><span style="color:var(--green)">● LIVE SIGNAL</span></div>
+          <svg class="wave" viewBox="0 0 600 50" preserveAspectRatio="none" aria-hidden="true">
+            <path id="wavePath" d="M0 25 H180 L195 25 L205 10 L216 40 L230 2 L244 47 L258 25 H600" stroke="#00ff9c" stroke-width="1.5" fill="none"/>
+            <path d="M0 25 H600" stroke="#00d9ff" stroke-opacity=".25" stroke-width="1"/>
+          </svg>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="section-title">Shortcuts // Projects</div>
+        <div class="cards">
+          <a class="card" href="#about">
+            <div class="icon">ϟ</div><h3>Solar Smart Street Light</h3>
+            <p>A student project exploring solar charging, light sensing and automatic switching.</p>
+            <small>OPEN PROJECT NOTE ↗</small>
+          </a>
+          <a class="card" href="https://github.com/" target="_blank" rel="noreferrer">
+            <div class="icon">&lt;/&gt;</div><h3>Engineering &amp; Code</h3>
+            <p>A space for experiments, calculations and things I learn along the way.</p>
+            <small>GITHUB ↗</small>
+          </a>
+          <a class="card" href="https://www.allaboutcircuits.com/" target="_blank" rel="noreferrer">
+            <div class="icon">⌁</div><h3>Circuit Resources</h3>
+            <p>Useful references for electronics, electrical concepts and circuit theory.</p>
+            <small>OPEN RESOURCE ↗</small>
+          </a>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-title">System // About</div>
+        <div class="about">
+          <div class="panel">
+            <div class="eyebrow">01 / PROFILE</div>
+            <h3>Curious by circuit.</h3>
+            <p>I'm an electrical engineering student interested in how power, control and technology connect. This little corner of the internet is my digital calling card — a place for projects, ideas and future experiments.</p>
+            <p style="color:var(--green);font-family:monospace">“Different voltages. Same purpose.”</p>
+          </div>
+          <div class="panel">
+            <div class="eyebrow">02 / INTERESTS</div>
+            <div class="meter"><div class="meter-label"><span>POWER &amp; ENERGY</span><span>EXPLORING</span></div><div class="track"><span style="--w:78%"></span></div></div>
+            <div class="meter"><div class="meter-label"><span>CIRCUIT DESIGN</span><span>LEARNING</span></div><div class="track"><span style="--w:66%"></span></div></div>
+            <div class="meter"><div class="meter-label"><span>AUTOMATION</span><span>CURIOUS</span></div><div class="track"><span style="--w:58%"></span></div></div>
+            <div class="meter"><div class="meter-label"><span>CODING</span><span>BUILDING</span></div><div class="track"><span style="--w:52%"></span></div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="eyebrow">// End of transmission</div>
+        <h2>Have a good <span class="glow">connection?</span></h2>
+        <p>For engineering chats, collaborations or just saying hi.</p>
+        <!-- Replace the example URL below with your Instagram profile or email. -->
+        <a class="btn primary" href="https://www.instagram.com/" target="_blank" rel="noreferrer">↗ FIND ME ON INSTAGRAM</a>
+      </section>
+    </main>
+    <footer><span>© <span id="year"></span> FARHAN.EXE // PERSONAL PAGE</span><span>BUILT WITH <span class="tiny">HTML · CSS · JS</span></span></footer>
+  </div>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const wave = document.getElementById("wavePath");
+    let phase = 0;
+    function animateWave() {
+      phase += 0.07;
+      const points = [];
+      for (let x = 0; x <= 600; x += 5) {
+        let y = 25 + Math.sin(x * 0.035 + phase) * 2;
+        if (x > 185 && x < 270) {
+          const envelope = Math.sin(((x - 185) / 85) * Math.PI);
+          y += Math.sin(x * 0.24 + phase * 2) * 20 * envelope;
+        }
+        points.push((x === 0 ? "M" : "L") + x + " " + y.toFixed(2));
+      }
+      wave.setAttribute("d", points.join(" "));
+      requestAnimationFrame(animateWave);
+    }
+    if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) animateWave();
+  </script>
+</body>
+</html>
